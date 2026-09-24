@@ -28,11 +28,16 @@
                     "altText": "มีการ์ดแอปพลิเคชันส่งถึงคุณ",
                     "contents": {
                         
-                        // --- นำโค้ด JSON ของ Flex Message (ตั้งแต่บรรทัด "type": "bubble") ที่ออกแบบไว้มาวางตรงนี้ ---
+                        // --- โครงสร้างการ์ด Flex Message ---
                         "type": "bubble",
                         "body": {
                             "type": "box",
                             "layout": "vertical",
+                            "action": {
+                                "type": "uri",
+                                "label": "เปิดเว็บ",
+                                "uri": "https://aicip-p3-app.onrender.com/"
+                            },
                             "contents": [
                                 {
                                     "type": "box",
@@ -141,8 +146,6 @@
                             ],
                             "paddingAll": "0px"
                         }
-                        // -------------------------------------------------------------------------
-                        
                     }
                 };
 
