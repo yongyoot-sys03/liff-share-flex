@@ -27,17 +27,16 @@
                     "type": "flex",
                     "altText": "มีการ์ดแอปพลิเคชันส่งถึงคุณ",
                     "contents": {
-                        
                         // --- โครงสร้างการ์ด Flex Message ---
                         "type": "bubble",
+                        "action": {
+                            "type": "uri",
+                            "label": "เปิดเว็บ",
+                            "uri": "https://aicip-p3-app.onrender.com/"
+                        },
                         "body": {
                             "type": "box",
                             "layout": "vertical",
-                            "action": {
-                                "type": "uri",
-                                "label": "เปิดเว็บ",
-                                "uri": "https://aicip-p3-app.onrender.com/"
-                            },
                             "contents": [
                                 {
                                     "type": "box",
@@ -145,6 +144,22 @@
                                 }
                             ],
                             "paddingAll": "0px"
+                        },
+                        "footer": {
+                            "type": "box",
+                            "layout": "vertical",
+                            "contents": [
+                                {
+                                    "type": "button",
+                                    "action": {
+                                        "type": "uri",
+                                        "label": "คลิกเปิดใช้งานระบบ",
+                                        "uri": "https://aicip-p3-app.onrender.com/"
+                                    },
+                                    "style": "primary",
+                                    "color": "#0056FF"
+                                }
+                            ]
                         }
                     }
                 };
