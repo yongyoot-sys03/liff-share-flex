@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>แชร์ Flex Message</title>
+    <!-- โหลดระบบของ LIFF -->
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <style>
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f5f5f5; }
+        button { padding: 15px 30px; font-size: 18px; color: white; background-color: #00B900; border: none; border-radius: 8px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <button onclick="sendFlex()">เลือกกลุ่มเพื่อส่งการ์ด</button>
+
+    <script>
+        // 1. นำ LIFF ID ของคุณมาใส่ตรงนี้
+        liff.init({ liffId: "ใส่_LIFF_ID_ของคุณตรงนี้" });
+
+        async function sendFlex() {
+            if (!liff.isLoggedIn()) {
+                liff.login();
+            } else {
+                // 2. โครงสร้างข้อความแบบ Flex
+                const flexMessage = {
+                    "type": "flex",
+                    "altText": "มีการ์ดแอปพลิเคชันส่งถึงคุณ",
+                    "contents": {
+                        
+                        // --- นำโค้ด JSON ของ Flex Message (ตั้งแต่บรรทัด "type": "bubble") ที่ออกแบบไว้มาวางตรงนี้ ---
+                        "type": "bubble",
+                        "body": {
+                            "type": "box",
+                            "layout": "vertical",
+                            "contents": [
+                                { "type": "text", "text": "ทดสอบการส่ง" }
+                            ]
+                        }
+                        // -------------------------------------------------------------------------
+                        
+                    }
+                };
+
+                try {
+                    const res = await liff.shareTargetPicker([flexMessage]);
+                    if (res) {
+                        liff.closeWindow(); // ส่งเสร็จแล้วปิดหน้าต่างทันที
+                    }
+                } catch (error) {
+                    alert("เกิดข้อผิดพลาด หรือคุณกดยกเลิก");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
