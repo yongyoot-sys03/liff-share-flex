@@ -1,179 +1,400 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>แชร์ Flex Message</title>
-    <!-- โหลดระบบของ LIFF -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Quick Link ปข.3 (ตล./ทข.)</title>
     <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f5f5f5; }
-        button { padding: 15px 30px; font-size: 18px; color: white; background-color: #00B900; border: none; border-radius: 8px; cursor: pointer; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background-color: #f8fafc;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Header */
+        .header {
+            background-color: #1e293b;
+            padding: 20px;
+            color: white;
+        }
+
+        .header .sub-title {
+            color: #38bdf8;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .header .main-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .header .desc {
+            color: #94a3b8;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        /* LIFF Share Button Section */
+        .liff-share-container {
+            padding: 16px 20px 0 20px;
+            display: none; /* จะแสดงผลเมื่อเปิดผ่าน LINE เท่านั้น */
+        }
+
+        .btn-share { 
+            background: linear-gradient(135deg, #06c755 0%, #05a847 100%); 
+            color: white; 
+            border: none; 
+            padding: 14px 20px; 
+            font-size: 16px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            width: 100%; 
+            box-shadow: 0 4px 12px rgba(6, 199, 85, 0.3); 
+            transition: all 0.2s ease;
+        }
+
+        .btn-share:active { 
+            transform: scale(0.96); 
+        }
+
+        /* Body Content */
+        .content {
+            padding: 20px;
+        }
+
+        .section-title {
+            color: #475569;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .section-title:not(:first-child) {
+            margin-top: 20px;
+        }
+
+        /* Grid System 2 Columns */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* Card Item */
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 12px;
+            border-radius: 14px;
+            text-decoration: none;
+            color: #ffffff;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:active {
+            transform: scale(0.96);
+        }
+
+        .card .icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .card .label {
+            font-size: 12px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* Distinct Color Palette */
+        .bg-sky { background-color: #0284c7; }
+        .bg-purple { background-color: #7c3aed; }
+        .bg-orange { background-color: #ea580c; }
+        .bg-pink { background-color: #db2777; }
+        .bg-blue { background-color: #1d4ed8; }
+        .bg-green { background-color: #16a34a; }
+        .bg-red { background-color: #dc2626; }
+        .bg-yellow { background-color: #ca8a04; }
     </style>
 </head>
 <body>
-    <button onclick="sendFlex()">เลือกกลุ่มเพื่อส่งการ์ด</button>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="sub-title">DATA DRIVEN CHANNEL</div>
+            <div class="main-title">✨Quick Link ปข.3 (ตล./ทข.)</div>
+            <div class="desc">ส่วนการตลาดและบริการลูกค้า</div>
+        </div>
+
+        <!-- ปุ่มแชร์ผ่าน LINE LIFF (ซ่อนไว้ ถ้าไม่ใช่ LINE จะไม่แสดงปุ่มนี้) -->
+        <div id="liffShareBox" class="liff-share-container">
+            <button id="btnShare" class="btn-share">🚀 กดเพื่อแชร์ Flex Message เข้าแชต LINE</button>
+        </div>
+
+        <!-- Body Content (แสดง 8 การ์ดบน Web App / GitHub Pages) -->
+        <div class="content">
+            
+            <!-- Section 1: รายงานและสถิติ -->
+            <div class="section-title">📊 รายงานและสถิติ</div>
+            <div class="grid-container">
+                <a href="https://datastudio.google.com/reporting/e8f27de9-2a6f-4826-968b-5832dd277446" target="_blank" class="card bg-sky">
+                    <span class="icon">📈</span>
+                    <span class="label">รายได้ ปข.3</span>
+                </a>
+                <a href="https://drive.google.com/drive/folders/1EJ-ytwrPYziR0O9JXWXU_GMqBaXRR5-c?usp=drive_link" target="_blank" class="card bg-purple">
+                    <span class="icon">📢</span>
+                    <span class="label">สื่อแคมเปญ</span>
+                </a>
+                <a href="https://www.appsheet.com/start/68fcb5f9-b795-4057-bc52-273a7dd863d0" target="_blank" class="card bg-orange">
+                    <span class="icon">⏱️</span>
+                    <span class="label">SLA สลากฯ</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1sLu2_oVzRG1HaQ-CqXWkLRz82lpxHT_K3WAStyNzXms/htmlview#gid=0" target="_blank" class="card bg-pink">
+                    <span class="icon">📦</span>
+                    <span class="label">Package A01-A12</span>
+                </a>
+            </div>
+
+            <!-- Section 2: ระบบงานปฏิบัติการ -->
+            <div class="section-title">💻 ระบบงานปฏิบัติการ</div>
+            <div class="grid-container">
+                <a href="https://yongyoot14032528-aicipreg03.hf.space" target="_blank" class="card bg-blue">
+                    <span class="icon">🌐</span>
+                    <span class="label">AITHPREG03</span>
+                </a>
+                <a href="https://kritsada-thp.github.io/ElectionTHP/" target="_blank" class="card bg-green">
+                    <span class="icon">🗳️</span>
+                    <span class="label">เลือกตั้งท้องถิ่น</span>
+                </a>
+                <a href="https://script.google.com/macros/s/AKfycbxEyKRGW99ppQRgL_tmPoWQ1JvocnLnduioD177VIN9x_gvLuN-Q1Qe7yDXXT3EAws/exec" target="_blank" class="card bg-red">
+                    <span class="icon">✈️</span>
+                    <span class="label">ส่งของต่างประเทศ</span>
+                </a>
+                <a href="https://page.line.me/670tpafc" target="_blank" class="card bg-yellow">
+                    <span class="icon">🏆</span>
+                    <span class="label">PF&Tracking</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
 
     <script>
-        // 1. นำ LIFF ID ของคุณมาใส่ตรงนี้
-        liff.init({ liffId: "2011731844-JYR6nO5L" });
+        const LIFF_ID = "2011764737-4atHAAHK"; 
 
-        async function sendFlex() {
-            if (!liff.isLoggedIn()) {
-                liff.login();
-            } else {
-                // 2. โครงสร้างข้อความแบบ Flex
-                const flexMessage = {
-                    "type": "flex",
-                    "altText": "มีการ์ดแอปพลิเคชันส่งถึงคุณ",
-                    "contents": {
-                        // --- โครงสร้างการ์ด Flex Message ---
-                        "type": "bubble",
-                        "action": {
-                            "type": "uri",
-                            "label": "เปิดเว็บ",
-                            "uri": "https://aicip-p3-app.onrender.com/"
-                        },
-                        "body": {
+        function toExternalUrl(url) {
+            return url.includes('?') ? url + '&openExternalBrowser=1' : url + '?openExternalBrowser=1';
+        }
+
+        // เริ่มต้นทำงานกับ LINE LIFF
+        liff.init({ liffId: LIFF_ID }).then(() => {
+            if (liff.isInClient() || liff.isLoggedIn()) {
+                document.getElementById("liffShareBox").style.style.display = "block";
+            }
+        }).catch((err) => {
+            console.log("Web Mode Active (Non-LIFF environment)");
+        });
+
+        // Event สำหรับปุ่มแชร์ Flex Message
+        document.getElementById("btnShare").addEventListener("click", () => {
+            if (liff.isApiAvailable('shareTargetPicker')) {
+                liff.shareTargetPicker([
+                    {
+                        "type": "flex",
+                        "altText": "📌 เมนู Quick Link ปข.3 (ตล./ทข.)",
+                        "contents": {
+                          "type": "bubble",
+                          "size": "mega",
+                          "header": {
                             "type": "box",
                             "layout": "vertical",
+                            "backgroundColor": "#1e293b",
+                            "paddingAll": "16px",
                             "contents": [
-                                {
-                                    "type": "box",
-                                    "layout": "horizontal",
-                                    "contents": [
-                                        {
-                                            "type": "image",
-                                            "url": "https://i.postimg.cc/nLMjg9HY/krat-nha-Lead-l-kkh-a-(10)-01.png",
-                                            "size": "full",
-                                            "aspectMode": "cover",
-                                            "aspectRatio": "150:196",
-                                            "gravity": "center",
-                                            "flex": 1,
-                                            "margin": "none"
-                                        },
-                                        {
-                                            "type": "box",
-                                            "layout": "vertical",
-                                            "contents": [
-                                                {
-                                                    "type": "image",
-                                                    "url": "https://i.postimg.cc/7htGNB2W/CIP1-(1).png",
-                                                    "size": "full",
-                                                    "aspectMode": "cover",
-                                                    "aspectRatio": "150:98",
-                                                    "gravity": "center"
-                                                },
-                                                {
-                                                    "type": "image",
-                                                    "url": "https://i.postimg.cc/XqYBdMpk/CIP1.png",
-                                                    "size": "full",
-                                                    "aspectMode": "cover",
-                                                    "aspectRatio": "150:98",
-                                                    "gravity": "center"
-                                                }
-                                            ],
-                                            "flex": 1
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "box",
-                                    "layout": "horizontal",
-                                    "contents": [
-                                        {
-                                            "type": "box",
-                                            "layout": "vertical",
-                                            "contents": [
-                                                {
-                                                    "type": "image",
-                                                    "url": "https://i.postimg.cc/cLySB6CM/logo-post2.png",
-                                                    "aspectMode": "cover",
-                                                    "size": "full",
-                                                    "margin": "xxl"
-                                                }
-                                            ],
-                                            "cornerRadius": "100px",
-                                            "width": "72px",
-                                            "height": "72px"
-                                        },
-                                        {
-                                            "type": "box",
-                                            "layout": "vertical",
-                                            "contents": [
-                                                {
-                                                    "type": "text",
-                                                    "contents": [
-                                                        {
-                                                            "type": "span",
-                                                            "text": "ระบบปฏิบัติการ AICIPReg03-ปข.3 (ตล.)",
-                                                            "weight": "bold",
-                                                            "color": "#000000"
-                                                        },
-                                                        {
-                                                            "type": "span",
-                                                            "text": "     "
-                                                        },
-                                                        {
-                                                            "type": "span",
-                                                            "text": "Dowload ใช้งานได้ตามปกติ"
-                                                        }
-                                                    ],
-                                                    "size": "sm",
-                                                    "wrap": true
-                                                },
-                                                {
-                                                    "type": "box",
-                                                    "layout": "baseline",
-                                                    "contents": [
-                                                        {
-                                                            "type": "text",
-                                                            "text": "พัฒนาระบบโดย ปข.3 (ตล.)",
-                                                            "size": "sm",
-                                                            "color": "#bcbcbc"
-                                                        }
-                                                    ],
-                                                    "spacing": "sm",
-                                                    "margin": "md"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "spacing": "xl",
-                                    "paddingAll": "20px"
-                                }
-                            ],
-                            "paddingAll": "0px"
-                        },
-                        "footer": {
-                            "type": "box",
-                            "layout": "vertical",
-                            "contents": [
-                                {
-                                    "type": "button",
-                                    "action": {
-                                        "type": "uri",
-                                        "label": "คลิกเปิดใช้งานระบบ",
-                                        "uri": "https://aicip-p3-app.onrender.com/"
-                                    },
-                                    "style": "primary",
-                                    "color": "#0056FF"
-                                }
+                              {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "contents": [
+                                  { "type": "text", "text": "DATA DRIVEN CHANNEL", "color": "#38bdf8", "size": "xs", "weight": "bold" }
+                                ]
+                              },
+                              { "type": "text", "text": "✨Quick Link ปข.3 (ตล./ทข.)", "color": "#ffffff", "size": "lg", "weight": "bold", "margin": "xs", "wrap": true },
+                              { "type": "text", "text": "ส่วนการตลาดและบริการลูกค้า", "color": "#94a3b8", "size": "xs", "margin": "xs" }
                             ]
+                          },
+                          "body": {
+                            "type": "box",
+                            "layout": "vertical",
+                            "spacing": "md",
+                            "paddingAll": "16px",
+                            "backgroundColor": "#f8fafc",
+                            "contents": [
+                              { "type": "text", "text": "📊 รายงานและสถิติ", "color": "#475569", "size": "xs", "weight": "bold", "margin": "xs" },
+                              {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "spacing": "sm",
+                                "contents": [
+                                  {
+                                    "type": "box",
+                                    "layout": "vertical",
+                                    "backgroundColor": "#0284c7",
+                                    "cornerRadius": "lg",
+                                    "paddingAll": "12px",
+                                    "action": { "type": "uri", "label": "รายได้ ปข.3", "uri": toExternalUrl("https://datastudio.google.com/reporting/e8f27de9-2a6f-4826-968b-5832dd277446") },
+                                    "contents": [
+                                      { "type": "text", "text": "📈", "size": "lg", "align": "center" },
+                                      { "type": "text", "text": "รายได้ ปข.3", "color": "#ffffff", "weight": "bold", "size": "xs", "align": "center", "margin": "xs" }
+                                    ]
+                                  },
+                                  {
+                                    "type": "box",
+                                    "layout": "vertical",
+                                    "backgroundColor": "#7c3aed",
+                                    "cornerRadius": "lg",
+                                    "paddingAll": "12px",
+                                    "action": { "type": "uri", "label": "สื่อแคมเปญ", "uri": toExternalUrl("https://drive.google.com/drive/folders/1EJ-ytwrPYziR0O9JXWXU_GMqBaXRR5-c?usp=drive_link") },
+                                    "contents": [
+                                      { "type": "text", "text": "📢", "size": "lg", "align": "center" },
+                                      { "type": "text", "text": "สื่อแคมเปญ", "color": "#ffffff", "weight": "bold", "size": "xs", "align": "center", "margin": "xs" }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "spacing": "sm",
+                                "contents": [
+                                  {
+                                    "type": "box",
+                                    "layout": "vertical",
+                                    "backgroundColor": "#ea580c",
+                                    "cornerRadius": "lg",
+                                    "paddingAll": "12px",
+                                    "action": { "type": "uri", "label": "SLA สลากฯ", "uri": toExternalUrl("https://www.appsheet.com/start/68fcb5f9-b795-4057-bc52-273a7dd863d0") },
+                                    "contents": [
+                                      { "type": "text", "text": "⏱️", "size": "lg", "align": "center" },
+                                      { "type": "text", "text": "SLA สลากฯ", "color": "#ffffff", "weight": "bold", "size": "xs", "align": "center", "margin": "xs" }
+                                    ]
+                                  },
+                                  {
+                                    "type": "box",
+                                    "layout": "vertical",
+                                    "backgroundColor": "#db2777",
+                                    "cornerRadius": "lg",
+                                    "paddingAll": "12px",
+                                    "action": { "type": "uri", "label": "Package", "uri": toExternalUrl("https://docs.google.com/spreadsheets/d/1sLu2_oVzRG1HaQ-CqXWkLRz82lpxHT_K3WAStyNzXms/htmlview#gid=0") },
+                                    "contents": [
+                                      { "type": "text", "text": "📦", "size": "lg", "align": "center" },
+                                      { "type": "text", "text": "Package A01-A12", "color": "#ffffff", "weight": "bold", "size": "xs", "align": "center", "margin": "xs" }
+                                    ]
+                                  }
+                                ]
+                              },
+                              { "type": "text", "text": "💻 ระบบงานปฏิบัติการ", "color": "#475569", "size": "xs", "weight": "bold", "margin": "md" },
+                              {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "spacing": "sm",
+                                "contents": [
+                                  {
+                                    "type": "box",
+                                    "layout": "vertical",
+                                    "backgroundColor": "#1d4ed8",
+                                    "cornerRadius": "lg",
+                                    "paddingAll": "12px",
+                                    "action": { "type": "uri", "label": "AITHPREG03", "uri": toExternalUrl("https://yongyoot14032528-aicipreg03.hf.space") },
+                                    "contents": [
+                                      { "type": "text", "text": "🌐", "size": "lg", "align": "center" },
+                                      { "type": "text", "text": "AITHPREG03", "color": "#ffffff", "weight": "bold", "size": "xs", "align": "center", "margin": "xs" }
+                                    ]
+                                  },
+                                  {
+                                    "type": "box",
+                                    "layout": "vertical",
+                                    "backgroundColor": "#16a34a",
+                                    "cornerRadius": "lg",
+                                    "paddingAll": "12px",
+                                    "action": { "type": "uri", "label": "เลือกตั้งท้องถิ่น", "uri": toExternalUrl("https://kritsada-thp.github.io/ElectionTHP/") },
+                                    "contents": [
+                                      { "type": "text", "text": "🗳️", "size": "lg", "align": "center" },
+                                      { "type": "text", "text": "เลือกตั้งท้องถิ่น", "color": "#ffffff", "weight": "bold", "size": "xs", "align": "center", "margin": "xs" }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "spacing": "sm",
+                                "contents": [
+                                  {
+                                    "type": "box",
+                                    "layout": "vertical",
+                                    "backgroundColor": "#dc2626",
+                                    "cornerRadius": "lg",
+                                    "paddingAll": "12px",
+                                    "action": { "type": "uri", "label": "ส่งต่างประเทศ", "uri": toExternalUrl("https://script.google.com/macros/s/AKfycbxEyKRGW99ppQRgL_tmPoWQ1JvocnLnduioD177VIN9x_gvLuN-Q1Qe7yDXXT3EAws/exec") },
+                                    "contents": [
+                                      { "type": "text", "text": "✈️", "size": "lg", "align": "center" },
+                                      { "type": "text", "text": "ส่งต่างประเทศ", "color": "#ffffff", "weight": "bold", "size": "xs", "align": "center", "margin": "xs" }
+                                    ]
+                                  },
+                                  {
+                                    "type": "box",
+                                    "layout": "vertical",
+                                    "backgroundColor": "#ca8a04",
+                                    "cornerRadius": "lg",
+                                    "paddingAll": "12px",
+                                    "action": { "type": "uri", "label": "PF&Tracking", "uri": toExternalUrl("https://page.line.me/670tpafc") },
+                                    "contents": [
+                                      { "type": "text", "text": "🏆", "size": "lg", "align": "center" },
+                                      { "type": "text", "text": "PF&Tracking", "color": "#ffffff", "weight": "bold", "size": "xs", "align": "center", "margin": "xs" }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
                         }
                     }
-                };
-
-                try {
-                    const res = await liff.shareTargetPicker([flexMessage]);
-                    if (res) {
-                        liff.closeWindow(); // ส่งเสร็จแล้วปิดหน้าต่างทันที
-                    }
-                } catch (error) {
-                    alert("เกิดข้อผิดพลาด หรือคุณกดยกเลิก");
-                }
+                ]).then((res) => {
+                    if (res) liff.closeWindow(); 
+                }).catch((err) => {
+                    alert("แชร์ไม่สำเร็จ: " + JSON.stringify(err));
+                });
             }
-        }
+        });
     </script>
 </body>
 </html>
