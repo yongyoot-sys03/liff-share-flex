@@ -61,7 +61,7 @@
         /* LIFF Share Button Section */
         .liff-share-container {
             padding: 16px 20px 0 20px;
-            display: none; /* จะแสดงผลเมื่อเปิดผ่าน LINE เท่านั้น */
+            display: none;
         }
 
         .btn-share { 
@@ -98,6 +98,28 @@
             margin-top: 20px;
         }
 
+        /* --- ปุ่ม HOT CAMPAIGN บนหน้า Web App --- */
+        .card-hot {
+            display: block;
+            background-color: #E11D48;
+            border-radius: 16px;
+            padding: 20px;
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 15px rgba(225, 29, 72, 0.2);
+            transition: transform 0.15s ease;
+        }
+        
+        .card-hot:active { transform: scale(0.97); }
+        .card-hot .hot-badge { color: #FDE047; font-size: 12px; font-weight: 700; display: block; margin-bottom: 8px; }
+        .card-hot .hot-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .card-hot .hot-icon { width: 24px; height: 24px; }
+        .card-hot .hot-subtitle { font-size: 14px; font-weight: 600; }
+        .card-hot .hot-desc { font-size: 11px; color: #f1f5f9; margin-bottom: 16px; font-weight: 400; }
+        .card-hot .hot-btn { background-color: white; color: #E11D48; font-size: 13px; font-weight: 700; padding: 10px 16px; border-radius: 8px; display: inline-block; }
+
         /* Grid System 2 Columns */
         .grid-container {
             display: grid;
@@ -115,26 +137,14 @@
             border-radius: 14px;
             text-decoration: none;
             color: #ffffff;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            transition: transform 0.15s ease;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
-        .card:active {
-            transform: scale(0.96);
-        }
+        .card:active { transform: scale(0.96); }
+        .card .icon { font-size: 24px; margin-bottom: 6px; }
+        .card .label { font-size: 12px; font-weight: 700; text-align: center; }
 
-        .card .icon {
-            font-size: 24px;
-            margin-bottom: 6px;
-        }
-
-        .card .label {
-            font-size: 12px;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        /* Distinct Color Palette */
         .bg-sky { background-color: #0284c7; }
         .bg-purple { background-color: #7c3aed; }
         .bg-orange { background-color: #ea580c; }
@@ -160,9 +170,21 @@
             <button id="btnShare" class="btn-share">🚀 กดเพื่อแชร์ Flex Message เข้าแชต LINE</button>
         </div>
 
-        <!-- Body Content (แสดง 8 การ์ดบน Web App / GitHub Pages) -->
+        <!-- Body Content -->
         <div class="content">
             
+            <!-- Section: HOT CAMPAIGN (สำหรับ Web App UI) -->
+            <a href="https://monomax.tv/9_promptpost" target="_blank" class="card-hot">
+                <span class="hot-badge">🔥 MONOMAX</span>
+                <div class="hot-title">
+                    <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/26bd.png" alt="football" class="hot-icon">
+                    VOTE Cheer Team
+                </div>
+                <div class="hot-subtitle">Premier League 2026/27</div>
+                <div class="hot-desc">ลุ้นรับโชคร่วมกับ MONOMAX & Prompt Post</div>
+                <div class="hot-btn">👉 คลิกเข้าร่วมกิจกรรม</div>
+            </a>
+
             <!-- Section 1: รายงานและสถิติ -->
             <div class="section-title">📊 รายงานและสถิติ</div>
             <div class="grid-container">
@@ -217,7 +239,6 @@
 
         // เริ่มต้นทำงานกับ LINE LIFF
         liff.init({ liffId: LIFF_ID }).then(() => {
-            // โชว์ปุ่มแชร์ "เฉพาะเมื่อผู้ใช้เปิดลิงก์ผ่านแอป LINE เท่านั้น"
             if (liff.isInClient()) {
                 document.getElementById("liffShareBox").style.display = "block";
             }
@@ -253,7 +274,7 @@
                                 "paddingAll": "md",
                                 "backgroundColor": "#f8fafc",
                                 "contents": [
-                                    /* --- MONOMAX CAMPAIGN --- */
+                                    /* --- MONOMAX CAMPAIGN (สำหรับ Flex Message) --- */
                                     {
                                         "type": "box",
                                         "layout": "vertical",
@@ -346,10 +367,10 @@
                                                 "backgroundColor": "#ffffff",
                                                 "cornerRadius": "lg",
                                                 "paddingAll": "md",
-                                                "action": { "type": "uri", "label": "Package A1-12", "uri": toExternalUrl("https://docs.google.com/spreadsheets/d/1sLu2_oVzRG1HaQ-CqXWkLRz82lpxHT_K3WAStyNzXms/htmlview#gid=0") },
+                                                "action": { "type": "uri", "label": "Package A01-A12", "uri": toExternalUrl("https://docs.google.com/spreadsheets/d/1sLu2_oVzRG1HaQ-CqXWkLRz82lpxHT_K3WAStyNzXms/htmlview#gid=0") },
                                                 "contents": [
                                                     { "type": "text", "text": "📦", "size": "xl", "align": "center" },
-                                                    { "type": "text", "text": "Package A1-12", "color": "#db2777", "weight": "bold", "size": "sm", "align": "center", "margin": "md" }
+                                                    { "type": "text", "text": "Package A01-A12", "color": "#db2777", "weight": "bold", "size": "sm", "align": "center", "margin": "md" }
                                                 ]
                                             }
                                         ]
