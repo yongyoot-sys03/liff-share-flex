@@ -217,11 +217,12 @@
 
         // เริ่มต้นทำงานกับ LINE LIFF
         liff.init({ liffId: LIFF_ID }).then(() => {
-            if (liff.isInClient() || liff.isLoggedIn()) {
-                document.getElementById("liffShareBox").style.style.display = "block";
+            // โชว์ปุ่มแชร์ "เฉพาะเมื่อผู้ใช้เปิดลิงก์ผ่านแอป LINE เท่านั้น"
+            if (liff.isInClient()) {
+                document.getElementById("liffShareBox").style.display = "block";
             }
         }).catch((err) => {
-            console.log("Web Mode Active (Non-LIFF environment)");
+            console.log("Web Mode Active (Non-LIFF environment)", err);
         });
 
         // Event สำหรับปุ่มแชร์ Flex Message
@@ -230,169 +231,205 @@
                 liff.shareTargetPicker([
                     {
                         "type": "flex",
-                        "altText": "📌 เมนู Quick Link ปข.3 (ตล./ทข.)",
+                        "altText": "📌 เมนู Quick Link ปข.3",
                         "contents": {
-                          "type": "bubble",
-                          "size": "mega",
-                          "header": {
-                            "type": "box",
-                            "layout": "vertical",
-                            "backgroundColor": "#1e293b",
-                            "paddingAll": "16px",
-                            "contents": [
-                              {
+                            "type": "bubble",
+                            "size": "mega",
+                            "header": {
                                 "type": "box",
-                                "layout": "horizontal",
+                                "layout": "vertical",
+                                "backgroundColor": "#1e293b",
+                                "paddingAll": "lg",
                                 "contents": [
-                                  { "type": "text", "text": "DATA DRIVEN CHANNEL", "color": "#38bdf8", "size": "xs", "weight": "bold" }
+                                    { "type": "text", "text": "DATA DRIVEN CHANNEL", "color": "#38bdf8", "size": "xs", "weight": "bold" },
+                                    { "type": "text", "text": "✨ Quick Link ปข.3", "color": "#ffffff", "size": "xl", "weight": "bold", "margin": "xs", "wrap": true },
+                                    { "type": "text", "text": "ส่วนการตลาดและบริการลูกค้า (ตล./ทข.)", "color": "#94a3b8", "size": "xs", "margin": "xs" }
                                 ]
-                              },
-                              { "type": "text", "text": "✨Quick Link ปข.3 (ตล./ทข.)", "color": "#ffffff", "size": "lg", "weight": "bold", "margin": "xs", "wrap": true },
-                              { "type": "text", "text": "ส่วนการตลาดและบริการลูกค้า", "color": "#94a3b8", "size": "xs", "margin": "xs" }
-                            ]
-                          },
-                          "body": {
-                            "type": "box",
-                            "layout": "vertical",
-                            "spacing": "md",
-                            "paddingAll": "16px",
-                            "backgroundColor": "#f8fafc",
-                            "contents": [
-                              { "type": "text", "text": "📊 รายงานและสถิติ", "color": "#475569", "size": "xs", "weight": "bold", "margin": "xs" },
-                              {
+                            },
+                            "body": {
                                 "type": "box",
-                                "layout": "horizontal",
-                                "spacing": "sm",
+                                "layout": "vertical",
+                                "spacing": "md",
+                                "paddingAll": "md",
+                                "backgroundColor": "#f8fafc",
                                 "contents": [
-                                  {
-                                    "type": "box",
-                                    "layout": "vertical",
-                                    "backgroundColor": "#0284c7",
-                                    "cornerRadius": "lg",
-                                    "paddingAll": "12px",
-                                    "action": { "type": "uri", "label": "รายได้ ปข.3", "uri": toExternalUrl("https://datastudio.google.com/reporting/e8f27de9-2a6f-4826-968b-5832dd277446") },
-                                    "contents": [
-                                      { "type": "text", "text": "📈", "size": "lg", "align": "center" },
-                                      { "type": "text", "text": "รายได้ ปข.3", "color": "#ffffff", "weight": "bold", "size": "xs", "align": "center", "margin": "xs" }
-                                    ]
-                                  },
-                                  {
-                                    "type": "box",
-                                    "layout": "vertical",
-                                    "backgroundColor": "#7c3aed",
-                                    "cornerRadius": "lg",
-                                    "paddingAll": "12px",
-                                    "action": { "type": "uri", "label": "สื่อแคมเปญ", "uri": toExternalUrl("https://drive.google.com/drive/folders/1EJ-ytwrPYziR0O9JXWXU_GMqBaXRR5-c?usp=drive_link") },
-                                    "contents": [
-                                      { "type": "text", "text": "📢", "size": "lg", "align": "center" },
-                                      { "type": "text", "text": "สื่อแคมเปญ", "color": "#ffffff", "weight": "bold", "size": "xs", "align": "center", "margin": "xs" }
-                                    ]
-                                  }
+                                    /* --- MONOMAX CAMPAIGN --- */
+                                    {
+                                        "type": "box",
+                                        "layout": "vertical",
+                                        "paddingAll": "lg",
+                                        "cornerRadius": "xl",
+                                        "backgroundColor": "#E11D48",
+                                        "action": { "type": "uri", "label": "Vote Premier League", "uri": toExternalUrl("https://monomax.tv/9_promptpost") },
+                                        "contents": [
+                                            { "type": "text", "text": "🔥 MONOMAX", "color": "#FDE047", "weight": "bold", "size": "sm" },
+                                            {
+                                                "type": "box",
+                                                "layout": "horizontal",
+                                                "margin": "md",
+                                                "spacing": "sm",
+                                                "contents": [
+                                                    { "type": "image", "url": "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/26bd.png", "size": "xxs", "flex": 0 },
+                                                    { "type": "text", "text": "VOTE Cheer Team", "color": "#ffffff", "weight": "bold", "size": "xl", "gravity": "center" }
+                                                ]
+                                            },
+                                            { "type": "text", "text": "Premier League 2026/27", "color": "#ffffff", "weight": "bold", "size": "md", "margin": "sm" },
+                                            { "type": "text", "text": "ลุ้นรับโชคร่วมกับ MONOMAX & Prompt Post", "color": "#f1f5f9", "size": "xs", "margin": "md", "wrap": true },
+                                            {
+                                                "type": "box",
+                                                "layout": "vertical",
+                                                "margin": "lg",
+                                                "backgroundColor": "#ffffff",
+                                                "cornerRadius": "md",
+                                                "paddingAll": "sm",
+                                                "contents": [
+                                                    { "type": "text", "text": "👉 คลิกเข้าร่วมกิจกรรม", "color": "#E11D48", "weight": "bold", "size": "sm", "align": "center" }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    { "type": "separator", "margin": "xl", "color": "#cbd5e1" },
+                                    
+                                    /* --- หมวดที่ 1 --- */
+                                    { "type": "text", "text": "📊 รายงานและสถิติ", "color": "#475569", "size": "sm", "weight": "bold", "margin": "lg" },
+                                    {
+                                        "type": "box",
+                                        "layout": "horizontal",
+                                        "spacing": "md",
+                                        "contents": [
+                                            {
+                                                "type": "box",
+                                                "layout": "vertical",
+                                                "backgroundColor": "#ffffff",
+                                                "cornerRadius": "lg",
+                                                "paddingAll": "md",
+                                                "action": { "type": "uri", "label": "รายได้ ปข.3", "uri": toExternalUrl("https://datastudio.google.com/reporting/e8f27de9-2a6f-4826-968b-5832dd277446") },
+                                                "contents": [
+                                                    { "type": "text", "text": "📈", "size": "xl", "align": "center" },
+                                                    { "type": "text", "text": "รายได้ ปข.3", "color": "#0284c7", "weight": "bold", "size": "sm", "align": "center", "margin": "md" }
+                                                ]
+                                            },
+                                            {
+                                                "type": "box",
+                                                "layout": "vertical",
+                                                "backgroundColor": "#ffffff",
+                                                "cornerRadius": "lg",
+                                                "paddingAll": "md",
+                                                "action": { "type": "uri", "label": "สื่อแคมเปญ", "uri": toExternalUrl("https://drive.google.com/drive/folders/1EJ-ytwrPYziR0O9JXWXU_GMqBaXRR5-c?usp=drive_link") },
+                                                "contents": [
+                                                    { "type": "text", "text": "📢", "size": "xl", "align": "center" },
+                                                    { "type": "text", "text": "สื่อแคมเปญ", "color": "#7c3aed", "weight": "bold", "size": "sm", "align": "center", "margin": "md" }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "box",
+                                        "layout": "horizontal",
+                                        "spacing": "md",
+                                        "contents": [
+                                            {
+                                                "type": "box",
+                                                "layout": "vertical",
+                                                "backgroundColor": "#ffffff",
+                                                "cornerRadius": "lg",
+                                                "paddingAll": "md",
+                                                "action": { "type": "uri", "label": "SLA สลากฯ", "uri": toExternalUrl("https://yongyoot1403-lotteryreg03.hf.space/") },
+                                                "contents": [
+                                                    { "type": "text", "text": "⏱️", "size": "xl", "align": "center" },
+                                                    { "type": "text", "text": "SLA สลากฯ", "color": "#ea580c", "weight": "bold", "size": "sm", "align": "center", "margin": "md" }
+                                                ]
+                                            },
+                                            {
+                                                "type": "box",
+                                                "layout": "vertical",
+                                                "backgroundColor": "#ffffff",
+                                                "cornerRadius": "lg",
+                                                "paddingAll": "md",
+                                                "action": { "type": "uri", "label": "Package A1-12", "uri": toExternalUrl("https://docs.google.com/spreadsheets/d/1sLu2_oVzRG1HaQ-CqXWkLRz82lpxHT_K3WAStyNzXms/htmlview#gid=0") },
+                                                "contents": [
+                                                    { "type": "text", "text": "📦", "size": "xl", "align": "center" },
+                                                    { "type": "text", "text": "Package A1-12", "color": "#db2777", "weight": "bold", "size": "sm", "align": "center", "margin": "md" }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    
+                                    /* --- หมวดที่ 2 --- */
+                                    { "type": "text", "text": "💻 ระบบงานปฏิบัติการ", "color": "#475569", "size": "sm", "weight": "bold", "margin": "xl" },
+                                    {
+                                        "type": "box",
+                                        "layout": "horizontal",
+                                        "spacing": "md",
+                                        "contents": [
+                                            {
+                                                "type": "box",
+                                                "layout": "vertical",
+                                                "backgroundColor": "#ffffff",
+                                                "cornerRadius": "lg",
+                                                "paddingAll": "md",
+                                                "action": { "type": "uri", "label": "AITHPREG03", "uri": toExternalUrl("https://yongyoot14032528-aicipreg03.hf.space") },
+                                                "contents": [
+                                                    { "type": "text", "text": "🌐", "size": "xl", "align": "center" },
+                                                    { "type": "text", "text": "AITHPREG03", "color": "#1d4ed8", "weight": "bold", "size": "sm", "align": "center", "margin": "md" }
+                                                ]
+                                            },
+                                            {
+                                                "type": "box",
+                                                "layout": "vertical",
+                                                "backgroundColor": "#ffffff",
+                                                "cornerRadius": "lg",
+                                                "paddingAll": "md",
+                                                "action": { "type": "uri", "label": "เลือกตั้งท้องถิ่น", "uri": toExternalUrl("https://kritsada-thp.github.io/ElectionTHP/") },
+                                                "contents": [
+                                                    { "type": "text", "text": "🗳️", "size": "xl", "align": "center" },
+                                                    { "type": "text", "text": "เลือกตั้งท้องถิ่น", "color": "#16a34a", "weight": "bold", "size": "sm", "align": "center", "margin": "md" }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "box",
+                                        "layout": "horizontal",
+                                        "spacing": "md",
+                                        "contents": [
+                                            {
+                                                "type": "box",
+                                                "layout": "vertical",
+                                                "backgroundColor": "#ffffff",
+                                                "cornerRadius": "lg",
+                                                "paddingAll": "md",
+                                                "action": { "type": "uri", "label": "ส่งต่างประเทศ", "uri": toExternalUrl("https://script.google.com/macros/s/AKfycbxEyKRGW99ppQRgL_tmPoWQ1JvocnLnduioD177VIN9x_gvLuN-Q1Qe7yDXXT3EAws/exec") },
+                                                "contents": [
+                                                    { "type": "text", "text": "✈️", "size": "xl", "align": "center" },
+                                                    { "type": "text", "text": "ส่งต่างประเทศ", "color": "#dc2626", "weight": "bold", "size": "sm", "align": "center", "margin": "md" }
+                                                ]
+                                            },
+                                            {
+                                                "type": "box",
+                                                "layout": "vertical",
+                                                "backgroundColor": "#ffffff",
+                                                "cornerRadius": "lg",
+                                                "paddingAll": "md",
+                                                "action": { "type": "uri", "label": "PF&Tracking", "uri": toExternalUrl("https://page.line.me/670tpafc") },
+                                                "contents": [
+                                                    { "type": "text", "text": "🏆", "size": "xl", "align": "center" },
+                                                    { "type": "text", "text": "PF&Tracking", "color": "#ca8a04", "weight": "bold", "size": "sm", "align": "center", "margin": "md" }
+                                                ]
+                                            }
+                                        ]
+                                    }
                                 ]
-                              },
-                              {
-                                "type": "box",
-                                "layout": "horizontal",
-                                "spacing": "sm",
-                                "contents": [
-                                  {
-                                    "type": "box",
-                                    "layout": "vertical",
-                                    "backgroundColor": "#ea580c",
-                                    "cornerRadius": "lg",
-                                    "paddingAll": "12px",
-                                    "action": { "type": "uri", "label": "SLA สลากฯ", "uri": toExternalUrl("https://www.appsheet.com/start/68fcb5f9-b795-4057-bc52-273a7dd863d0") },
-                                    "contents": [
-                                      { "type": "text", "text": "⏱️", "size": "lg", "align": "center" },
-                                      { "type": "text", "text": "SLA สลากฯ", "color": "#ffffff", "weight": "bold", "size": "xs", "align": "center", "margin": "xs" }
-                                    ]
-                                  },
-                                  {
-                                    "type": "box",
-                                    "layout": "vertical",
-                                    "backgroundColor": "#db2777",
-                                    "cornerRadius": "lg",
-                                    "paddingAll": "12px",
-                                    "action": { "type": "uri", "label": "Package", "uri": toExternalUrl("https://docs.google.com/spreadsheets/d/1sLu2_oVzRG1HaQ-CqXWkLRz82lpxHT_K3WAStyNzXms/htmlview#gid=0") },
-                                    "contents": [
-                                      { "type": "text", "text": "📦", "size": "lg", "align": "center" },
-                                      { "type": "text", "text": "Package A01-A12", "color": "#ffffff", "weight": "bold", "size": "xs", "align": "center", "margin": "xs" }
-                                    ]
-                                  }
-                                ]
-                              },
-                              { "type": "text", "text": "💻 ระบบงานปฏิบัติการ", "color": "#475569", "size": "xs", "weight": "bold", "margin": "md" },
-                              {
-                                "type": "box",
-                                "layout": "horizontal",
-                                "spacing": "sm",
-                                "contents": [
-                                  {
-                                    "type": "box",
-                                    "layout": "vertical",
-                                    "backgroundColor": "#1d4ed8",
-                                    "cornerRadius": "lg",
-                                    "paddingAll": "12px",
-                                    "action": { "type": "uri", "label": "AITHPREG03", "uri": toExternalUrl("https://yongyoot14032528-aicipreg03.hf.space") },
-                                    "contents": [
-                                      { "type": "text", "text": "🌐", "size": "lg", "align": "center" },
-                                      { "type": "text", "text": "AITHPREG03", "color": "#ffffff", "weight": "bold", "size": "xs", "align": "center", "margin": "xs" }
-                                    ]
-                                  },
-                                  {
-                                    "type": "box",
-                                    "layout": "vertical",
-                                    "backgroundColor": "#16a34a",
-                                    "cornerRadius": "lg",
-                                    "paddingAll": "12px",
-                                    "action": { "type": "uri", "label": "เลือกตั้งท้องถิ่น", "uri": toExternalUrl("https://kritsada-thp.github.io/ElectionTHP/") },
-                                    "contents": [
-                                      { "type": "text", "text": "🗳️", "size": "lg", "align": "center" },
-                                      { "type": "text", "text": "เลือกตั้งท้องถิ่น", "color": "#ffffff", "weight": "bold", "size": "xs", "align": "center", "margin": "xs" }
-                                    ]
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "box",
-                                "layout": "horizontal",
-                                "spacing": "sm",
-                                "contents": [
-                                  {
-                                    "type": "box",
-                                    "layout": "vertical",
-                                    "backgroundColor": "#dc2626",
-                                    "cornerRadius": "lg",
-                                    "paddingAll": "12px",
-                                    "action": { "type": "uri", "label": "ส่งต่างประเทศ", "uri": toExternalUrl("https://script.google.com/macros/s/AKfycbxEyKRGW99ppQRgL_tmPoWQ1JvocnLnduioD177VIN9x_gvLuN-Q1Qe7yDXXT3EAws/exec") },
-                                    "contents": [
-                                      { "type": "text", "text": "✈️", "size": "lg", "align": "center" },
-                                      { "type": "text", "text": "ส่งต่างประเทศ", "color": "#ffffff", "weight": "bold", "size": "xs", "align": "center", "margin": "xs" }
-                                    ]
-                                  },
-                                  {
-                                    "type": "box",
-                                    "layout": "vertical",
-                                    "backgroundColor": "#ca8a04",
-                                    "cornerRadius": "lg",
-                                    "paddingAll": "12px",
-                                    "action": { "type": "uri", "label": "PF&Tracking", "uri": toExternalUrl("https://page.line.me/670tpafc") },
-                                    "contents": [
-                                      { "type": "text", "text": "🏆", "size": "lg", "align": "center" },
-                                      { "type": "text", "text": "PF&Tracking", "color": "#ffffff", "weight": "bold", "size": "xs", "align": "center", "margin": "xs" }
-                                    ]
-                                  }
-                                ]
-                              }
-                            ]
-                          }
+                            }
                         }
                     }
                 ]).then((res) => {
                     if (res) liff.closeWindow(); 
                 }).catch((err) => {
-                    alert("แชร์ไม่สำเร็จ: " + JSON.stringify(err));
+                    alert("แชร์ไม่สำเร็จ (ตรวจสอบ JSON): " + JSON.stringify(err));
                 });
+            } else {
+                alert("กรุณาเปิดลิงก์ผ่านแอป LINE ครับ");
             }
         });
     </script>
